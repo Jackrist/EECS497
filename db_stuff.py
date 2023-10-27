@@ -43,12 +43,24 @@ def db_init():
 
 
 def db_new_user():
-    return 0
+    con = sqlite3.connect("497_Lost_n_Found.db")
+    cur = con.cursor()
+
+    con.commit()
+    con.close()
 
 
 def db_new_item():
-    return 0
+    con = sqlite3.connect("497_Lost_n_Found.db")
+    cur = con.cursor()
+
+    con.commit()
+    con.close()
 
 
 def db_edit_preferences(userID):
-    return 0
+    con = sqlite3.connect("497_Lost_n_Found.db")
+    cur = con.cursor()
+    
+    con.commit()
+    con.close()
