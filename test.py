@@ -1,25 +1,43 @@
 from flask import Flask, request, jsonify
-import mysql.connector
+import sqlite3
+import db_stuff
 
-app = Flask(__name)
+app = Flask(__name__)
 
-# MySQL connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="your_username",
-    password="your_password",
-    database="lost_and_found"
-)
+# Database initialization (if needed)
+db_stuff.db_init()
 
-# Define API endpoints for user registration, item submission, etc.
+# Define new (sometimes API ?) endpoints as needed below.
 
-# Example user registration endpoint
-@app.route('/api/register', methods=['POST'])
+@app.route('/signup/')
 def register_user():
-    # Handle user registration logic, including database interaction
-    # Return appropriate response
+    '''Handles user registration & initial preference setting.'''
+    # 1. Grab html form values
+    # 2. Call db_stuff func for adding new users
+    # 3. Call db_stuff func for setting preferences
+    # 4. Redirect?
+    
+@app.route('/preferences/')
+def set_preferences():
+    '''Set/update user notification preferences'''
+    # 1. Call db_stuff func for setting preferences
+    # 2. Redirect?
 
-# Add similar endpoints for item submission, notification preferences, etc.
+@app.route('/submit/')
+def submit_lost_item():
+    '''Adds a new item to the lost_items table.'''
+    # 1. Grab html form values
+    # 2. Call db_stuff func for adding new lost items
+    # 3. Redirect?
+
+@app.route('/')
+def show_homepage():
+    '''Deaf-friendly lost n' found homepage.'''
+
+@app.route('/login/')
+def show_login():
+    '''Deaf-friendly lost n' found login page.'''
+
 
 if __name__ == '__main__':
     app.run()
