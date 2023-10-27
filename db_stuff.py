@@ -5,9 +5,9 @@ def db_init():
     con = sqlite3.connect("497_Lost_n_Found.db")
     cur = con.cursor()
 
-    # Create a "users" table
+    # Create a "users" table if necessary
     cur.execute("""
-        CREATE TABLE users (
+        CREATE TABLE IF NOT EXISTS users (
         id INT PRIMARY KEY AUTO_INCREMENT,
         username VARCHAR(50) NOT NULL,
         password VARCHAR(255) NOT NULL,
@@ -15,9 +15,9 @@ def db_init():
         )
     """) # Add more user-related fields
 
-    # Create a "lost_items" table
+    # Create a "lost_items" table if necessary
     cur.execute("""
-        CREATE TABLE lost_items (
+        CREATE TABLE IF NOT EXISTS lost_items (
         id INT PRIMARY KEY AUTO_INCREMENT,
         user_id INT,
         item_name VARCHAR(100) NOT NULL,
@@ -27,9 +27,9 @@ def db_init():
         )
     """) # Add more item-related fields
 
-    # Create a "notification_preferences" table
+    # Create a "notification_preferences" table if necessary
     cur.execute("""
-        CREATE TABLE notification_preferences (
+        CREATE TABLE IF NOT EXISTS notification_preferences (
         user_id INT PRIMARY KEY,
         item_pickup BOOLEAN,
         item_dropoff BOOLEAN,
