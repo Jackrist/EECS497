@@ -92,6 +92,7 @@ def show_homepage():
 @app.route('/login/') # We want this to be the default page so that we can always get logged_in_user first for template rendering and personalization of other pages. 
 def show_login():
     '''Deaf-friendly lost n' found login page.'''
+    # Use set_logged_in_user() at some point in here
 
 
 if __name__ == '__main__':
