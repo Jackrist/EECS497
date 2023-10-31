@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>app_name_here</title>
+        <!-- Include CSS and JavaScript libraries -->
+    </head>
+    <body>
+        <h1>app_name_here</h1>
+        <h2 align="right">{{logname}} (UserID: {{userID}})</h2> <!-- 'logname', 'userID' are part of the context this template is rendered with in show_homepage(). -->
+        <div>
+            <h3>Submit a lost item here!</h3>
+            <form action="{{url_for('submit_lost_item')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{userID}}"/>
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name"/>
+                <label for="description">Item Description:</label>
+                <input type="text" name="description"/>
+                <label for="date_lost">Date Lost (YYYY-MM-DD):</label>
+                <input type="text" name="date_lost"/>
+                <label for="location">Location:</label>
+                <input type="text" name="location"/>
+                <input type="submit" name="Submit!"/>
+            </form>
+        </div>
+        <div>
+            <h3>Submit a found item here!</h3>
+            <form action="{{url_for('submit_found_item')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{userID}}"/>
+                <label for="item_name">Item Name:</label>
+                <input type="text" name="item_name"/>
+                <label for="description">Item Description:</label>
+                <input type="text" name="description"/>
+                <label for="date_lost">Date Found (YYYY-MM-DD):</label>
+                <input type="text" name="date_lost"/>
+                <label for="location">Location:</label>
+                <input type="text" name="location"/>
+                <input type="submit" name="Submit!"/>
+            </form>
+        </div>
+        <div>
+            <h3>Edit notification preferences here!</h3>
+            <form action="{{url_for('edit_preferences')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{userID}}"/>
+                <label for="item_pickup">Notify on Item Pickup? (TRUE/FALSE):</label>
+                <input type="text" name="item_pickup"/>
+                <label for="item_dropoff">Notify on Item Dropoff? (TRUE/FALSE):</label>
+                <input type="text" name="item_dropoff"/>
+                <label for="new_messages">Notify w/ New Messages? (TRUE/FALSE):</label>
+                <input type="text" name="new_messages"/>
+                <input type="submit" name="Submit!"/>
+            </form>
+        </div>
+        <div>
+            <h3>My lost items</h3>
+            {% for lost in losts %} <!-- 'losts' is part of the context this template is rendered with. -->
+            <div>
+                <h4>
+                    {{lost.item_name}}
+                </h4>
+                ID: {{lost.id}}, Description: {{lost.description}}, Date Lost: {{lost.date_lost}}, Location: {{lost.location}}
+            </div>
+            {% endfor %}
+        </div>
+        <div>
+            <h3>My found items</h3>
+            {% for found in founds %}
+            <div>
+                <h4>
+                    {{found.item_name}}
+                </h4>
+                ID: {{found.id}}, Description: {{found.description}}, Date Found: {{found.date_found}}, Location: {{found.location}}
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

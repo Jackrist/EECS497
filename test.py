@@ -40,7 +40,7 @@ def set_preferences():
         # 3. Call db_stuff func for setting preferences
         db_stuff.db_edit_preferences(user_id, item_pickup, item_dropoff, new_messages)    # 2. Redirect?
 
-@app.route('/submit/')
+@app.route('/submitlost/')
 def submit_lost_item():
     '''Adds a new item to the lost_items table.'''
     # 1. Grab html form values
@@ -48,7 +48,7 @@ def submit_lost_item():
     db_stuff.db_lost_item()
     # 3. Redirect?
 
-@app.route('/submit/')
+@app.route('/submitfound/')
 def submit_found_item():
     '''Adds a new item to the found_items table.'''
     # 1. Grab html form values
