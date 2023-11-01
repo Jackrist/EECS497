@@ -8,17 +8,16 @@ def init():
     # Create a "users" table if necessary
     cur.execute("""
         CREATE TABLE IF NOT EXISTS users (
-        id INT PRIMARY KEY AUTO_INCREMENT,
+        id INTEGER PRIMARY KEY,
         username VARCHAR(50) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        email VARCHAR(100) NOT NULL
+        password VARCHAR(255) NOT NULL
         )
     """) # Add more user-related fields
 
     # Create a "lost_items" table if necessary
     cur.execute("""
         CREATE TABLE IF NOT EXISTS lost_items (
-        id INT PRIMARY KEY AUTO_INCREMENT,
+        id INTEGER PRIMARY KEY,
         user_id INT,
         item_name VARCHAR(100) NOT NULL,
         description TEXT,
@@ -30,7 +29,7 @@ def init():
         # Create a "found_items" table if necessary
     cur.execute("""
         CREATE TABLE IF NOT EXISTS found_items (
-        id INT PRIMARY KEY AUTO_INCREMENT,
+        id INTEGER PRIMARY KEY,
         user_id INT,
         item_name VARCHAR(100) NOT NULL,
         description TEXT,
@@ -61,16 +60,16 @@ def set_logged_in_user(username):
     cur = con.cursor()
 
     # Retrieve the user_id based on the username from the "users" table
-    cur.execute("SELECT id FROM users WHERE username = ?", (username))
-    user_id = cur.fetchone()
+    cur.execute("SELECT id FROM users WHERE username = ?", (username,))
+    user_id = cur.fetchone()[0]
 
     # Tracks current user
-    cur.execute("""DROP TABLE IF EXISTS [logged_in_user]
-                CREATE TABLE logged_in_user (
-                id INT PRIMARY KEY
+    cur.execute("""DROP TABLE IF EXISTS logged_in_user""")
+    cur.execute("""CREATE TABLE logged_in_user (
+                id INT
                 )""")
     cur.execute("""INSERT INTO logged_in_user
-                VALUES (?)""", (user_id))
+                VALUES (?)""", (user_id,))
     
     con.commit()
     con.close()
@@ -82,12 +81,12 @@ def get_logged_in_user():
     cur = con.cursor()
 
     cur.execute("SELECT id FROM logged_in_user")
-    user_id = cur.fetchone()
+    user_id = cur.fetchone()[0]
 
     cur.execute("""SELECT username FROM users
                 WHERE id = ?
-                """, (user_id))
-    logname = cur.fetchone()
+                """, (user_id,))
+    logname = cur.fetchone()[0]
 
     con.commit()
     con.close()
@@ -95,15 +94,16 @@ def get_logged_in_user():
     return logname, user_id
 
 
-def new_user(username, password, email):
+def new_user(username, password):
     # Connect to the database and create a cursor
     con = sqlite3.connect("497_Lost_n_Found.db")
     # Creating a cursor makes a connection to connect theSQL server
     cur = con.cursor()
     cur.execute(""" 
-    INSERT INTO users
-    VALUES (""" + username + """, """ + password + """, """ + email + """ )
-    """)
+                INSERT INTO users
+                VALUES(?, ?, ?)
+                """, (0, username, password,))
+    
     con.commit()
     con.close()
 
@@ -143,7 +143,7 @@ def set_preferences(user_id, item_pickup, item_dropoff, new_messages):
     cur = con.cursor()
     cur.execute ("""INSERT INTO notification_preferences
                  VALUES (?, ?, ?, ?)
-                 """, (user_id, item_pickup, item_dropoff, new_messages))
+                 """, (user_id, item_pickup, item_dropoff, new_messages,))
     con.commit()
     con.close()
 
@@ -157,7 +157,7 @@ def edit_preferences(user_id, item_pickup, item_dropoff, new_messages):
                  UPDATE notification_preferences
                  SET item_pickup = ?, item_dropoff = ?, new_messages = ?
                  WHERE user_id = ?
-                 """, (item_pickup, item_dropoff, new_messages, user_id))
+                 """, (item_pickup, item_dropoff, new_messages, user_id,))
     con.commit()
     con.close()
 
@@ -169,7 +169,7 @@ def get_losts(user_id):
     cur.execute ("""
                  SELECT id, item_name, description, date_lost, location
                  FROM lost_items WHERE user_id = ?
-                 """, (user_id))
+                 """, (user_id,))
     
     losts = cur.fetchall()
 
@@ -187,7 +187,7 @@ def get_founds(user_id):
     cur.execute ("""
                  SELECT id, item_name, description, date_found, location
                  FROM found_items WHERE user_id = ?
-                 """, (user_id))
+                 """, (user_id,))
     
     founds = cur.fetchall()
 
@@ -195,3 +195,24 @@ def get_founds(user_id):
     con.close()
 
     return founds
+
+
+def check_pswd(user, pswd):
+    # Connect to the database and create a cursor
+    con = sqlite3.connect("497_Lost_n_Found.db")
+    # Creating a cursor makes a connection to connect the SQL server
+    cur = con.cursor()
+    cur.execute ("""
+                 SELECT password
+                 FROM users WHERE username = ?
+                 """, (user,))
+    
+    password = cur.fetchone()[0]
+
+    con.commit()
+    con.close()
+
+    if password == pswd:
+        return True
+    else:
+        return False

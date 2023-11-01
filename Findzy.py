@@ -3,7 +3,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 import sqlite3
 import db_stuff as db
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='templates')
 
 # jinja2 template environment initialization
 tmplt_env = Environment(
@@ -11,12 +11,9 @@ tmplt_env = Environment(
     autoescape=select_autoescape()
 )
 
-# Database initialization (if needed)
-db.init()
-
 # Define new (sometimes API ?) endpoints as needed below.
 
-@app.route('/signup/', methods=['POST'])
+@app.route('/signup/', methods=['GET', 'POST'])
 def register_user():
     '''Handles user registration & initial preference setting.'''
     # 1. Grab html form values
@@ -24,13 +21,12 @@ def register_user():
         username = request.form.get('username')
         password = request.form.get('password')
         email = request.form.get ('email')
-   
         # 2. (a) Call db func for adding new users
-        db.new_user(username, password, email)
-    # 4. Redirect or return a response
-        return redirect(url_for('set_preferences')) # redirect to set_pref?  
-    else:
-        return "Invalid request method"
+        db.new_user(username, password)
+        # 4. Redirect or return a response
+        return redirect(url_for('show_login')) # redirect to set_pref?  
+    else: # 'GET'
+        return render_template('signup.html')
     
 
 @app.route('/setpreferences/', methods=['GET', 'POST'])
@@ -89,11 +85,28 @@ def show_homepage():
     return render_template('home.html', **context)
 
 
-@app.route('/login/') # We want this to be the default page so that we can always get logged_in_user first for template rendering and personalization of other pages. 
+@app.route('/', methods=['GET', 'POST']) # We want this to be the default page so that we can always get logged_in_user first for template rendering and personalization of other pages. 
 def show_login():
     '''Deaf-friendly lost n' found login page.'''
+    # Database initialization (if needed)
+    db.init()
     # Use set_logged_in_user() at some point in here
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        verify = db.check_pswd(username, password)
 
+        if verify:
+            db.set_logged_in_user(username)
+            return redirect(url_for('show_homepage'))
+        else:
+            return redirect(url_for('login_error'))
+    else: # 'GET'
+        return render_template('login.html')
+
+@app.route('/loginerr/')
+def login_error():
+    return render_template('logerr.html')
 
 if __name__ == '__main__':
     app.run()
