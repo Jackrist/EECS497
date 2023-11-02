@@ -7,38 +7,37 @@
 <body>
     <h1>Findzy</h1>
     <h2 align="right">{{logname}} (UserID: {{userID}})</h2>
-  
-    <!-- Tabs for each section -->
-    <div class="tab">
-        <button onclick="openTab('lostItemTab')">Submit a Lost Item</button>
-        <button onclick="openTab('foundItemTab')">Submit a Found Item</button>
-        <button onclick="openTab('preferencesTab')">Edit Notification Preferences</button>
-        <button onclick="openTab('myLostItemsTab')">My Lost Items</button>
-        <button onclick="openTab('myFoundItemsTab')">My Found Items</button>
+
+    <form action="{{url_for('submit_lost')}}" method="get">
+        <button type="submit">Submit a Lost Item!</button>
+    </form>
+
+    <form action="{{url_for('submit_found')}}" method="get">
+        <button type="submit">Submit a Found Item!</button>
+    </form>
+
+    <form action="{{url_for('set_preferences')}}" method="get">
+        <button type="submit">Edit Notification Preferences</button>
+    </form>
+
+    <div>
+        <h3>My Lost Items</h3>
+        {% for lost in losts %}
+        <div>
+            <h4>{{lost[1]}}</h4>
+            ID: {{lost[0]}}, Description: {{lost[2]}}, Date Lost: {{lost[3]}}, Location: {{lost[4]}}
+        </div>
+        {% endfor %}
     </div>
 
-    <!-- Content for each tab -->
-    <div id="lostItemTab" class="tabcontent">
-        <!-- Your "Submit a Lost Item" content goes here -->
+    <div>
+        <h3>Items I've Found</h3>
+        {% for found in founds %}
+        <div>
+            <h4>{{found[1]}}</h4>
+            ID: {{found[0]}}, Description: {{found[2]}}, Date Found: {{found[3]}}, Location: {{found[4]}}
+        </div>
+        {% endfor %}
     </div>
-
-    <div id="foundItemTab" class="tabcontent">
-        <!-- Your "Submit a Found Item" content goes here -->
-    </div>
-
-    <div id="preferencesTab" class="tabcontent">
-        <!-- Your "Edit Notification Preferences" content goes here -->
-    </div>
-
-    <div id="myLostItemsTab" class="tabcontent">
-        <!-- Your "My Lost Items" content goes here -->
-    </div>
-
-    <div id="myFoundItemsTab" class="tabcontent">
-        <!-- Your "My Found Items" content goes here -->
-    </div>
-  
-
-
 </body>
 </html>

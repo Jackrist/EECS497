@@ -10,14 +10,14 @@
 
     <div>
         <h3>Submit a found item here!</h3>
-        <form action="{{url_for('submit_found_item')}}" method="post" enctype="multipart/form-data">
+        <form action="{{url_for('submit_found')}}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="user_id" value="{{userID}}"/>
             <label for="item_name">Item Name:</label>
             <input type="text" name="item_name"/>
             <label for="description">Item Description:</label>
             <input type="text" name="description"/>
-            <label for="date_lost">Date Found (YYYY-MM-DD):</label>
-            <input type="text" name="date_lost"/>
+            <label for="date_found">Date Found (YYYY-MM-DD):</label>
+            <input type="text" name="date_found"/>
             <label for="location">Location:</label>
             <input type="text" name="location"/>
             <input type="submit" name="Submit!"/>

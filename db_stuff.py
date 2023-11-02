@@ -115,11 +115,10 @@ def lost_item(user_id, item_name, description, date_lost, location):
     cur = con.cursor()
     cur.execute ("""
     INSERT INTO lost_items
-    VALUES (""" + user_id + """, """ + item_name + """, """ + description + """, """ + date_lost + """,""" + location + """)
-    """)
+    VALUES (?, ?, ?, ?, ?, ?)
+    """, (0, user_id, item_name, description, date_lost, location,))
     con.commit()
     con.close()
-    return 0
 
 
 def found_item(user_id, item_name, description, date_found, location):
@@ -128,12 +127,11 @@ def found_item(user_id, item_name, description, date_found, location):
     # Creating a cursor makes a connection to connect the SQL server
     cur = con.cursor()
     cur.execute ("""
-    INSERT INTO lost_items
-    VALUES (""" + user_id + """, """ + item_name + """, """ + description + """, """ + date_found + """,""" + location + """)
-    """)
+    INSERT INTO found_items
+    VALUES (?, ?, ?, ?, ?, ?)
+    """, (0, user_id, item_name, description, date_found, location,))
     con.commit()
     con.close()
-    return 0
 
 
 def set_preferences(user_id, item_pickup, item_dropoff, new_messages):

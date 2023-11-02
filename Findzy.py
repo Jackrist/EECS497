@@ -29,47 +29,61 @@ def register_user():
         return render_template('signup.html')
     
 
-@app.route('/setpreferences/', methods=['GET', 'POST'])
+@app.route('/preferences/', methods=['GET', 'POST'])
 def set_preferences():
     '''Set/update user notification preferences'''
     if request.method == 'POST':
 
-        username = request.form.get('username')
+        userID = request.form.get('user_id')
         item_pickup = request.form.get ('item_pickup')
         item_dropoff = request.form.get ('item_dropoff')
         new_messages = request.form.get ('new_messages')
 
-        # 2. (b) Retrieve user_id from "users" table
-        user_id = db.retrieve_user_id(username)
-        # 3. Call db func for setting preferences
-        db.set_preferences(user_id, item_pickup, item_dropoff, new_messages)    
-        # Redirect to home?
+        db.set_preferences(userID, item_pickup, item_dropoff, new_messages)    
+        return redirect(url_for('show_homepage'))
     else:
-        compile = compile
-    return 0
+        logname, user_id = db.get_logged_in_user()
+        context = {"logname": logname, "userID": user_id}
+
+        return render_template('prefs.html', **context)
 
 
-@app.route('/editpreferences/')
-def edit_preferences():
-    return 0
-
-
-@app.route('/submitlost/')
-def submit_lost_item():
+@app.route('/submitlost/', methods=['GET', 'POST'])
+def submit_lost():
     '''Adds a new item to the lost_items table.'''
-    # 1. Grab html form values
-    # 2. Call db func for adding new lost items
-    db.lost_item()
-    # 3. Redirect?
+    if request.method == 'POST':
+        userID = request.form.get('user_id')
+        item_name = request.form.get ('item_name')
+        description = request.form.get ('description')
+        date_lost = request.form.get ('date_lost')
+        location = request.form.get('location')
+
+        db.lost_item(userID, item_name, description, date_lost, location)
+        return redirect(url_for('show_homepage'))
+    else: # GET
+        logname, user_id = db.get_logged_in_user()
+        context = {"logname": logname, "userID": user_id}
+
+        return render_template('submitL.html', **context)
 
 
-@app.route('/submitfound/')
-def submit_found_item():
+@app.route('/submitfound/', methods=['GET', 'POST'])
+def submit_found():
     '''Adds a new item to the found_items table.'''
-    # 1. Grab html form values
-    # 2. Call db func for adding found items
-    db.found_item()
-    # 3. Redirect?
+    if request.method == 'POST':
+        userID = request.form.get('user_id')
+        item_name = request.form.get ('item_name')
+        description = request.form.get ('description')
+        date_found = request.form.get ('date_found')
+        location = request.form.get('location')
+
+        db.found_item(userID, item_name, description, date_found, location)
+        return redirect(url_for('show_homepage'))
+    else: # GET
+        logname, user_id = db.get_logged_in_user()
+        context = {"logname": logname, "userID": user_id}
+
+        return render_template('submitF.html', **context)
 
 
 @app.route('/home/') # REFER HERE FOR EXAMPLE OF CONTEXT CREATION AND TEMPLATE RENDERING !!!
