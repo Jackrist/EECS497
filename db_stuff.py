@@ -1,4 +1,5 @@
 import sqlite3
+import random
 
 def init():
     # Connect to the database and create a cursor
@@ -99,10 +100,13 @@ def new_user(username, password):
     con = sqlite3.connect("497_Lost_n_Found.db")
     # Creating a cursor makes a connection to connect theSQL server
     cur = con.cursor()
+
+    userID = random.randint(0, 1000)
+
     cur.execute(""" 
                 INSERT INTO users
                 VALUES(?, ?, ?)
-                """, (0, username, password,))
+                """, (userID, username, password,))
     
     con.commit()
     con.close()
@@ -113,10 +117,13 @@ def lost_item(user_id, item_name, description, date_lost, location):
     con = sqlite3.connect("497_Lost_n_Found.db")
     # Creating a cursor makes a connection to connect the SQL server
     cur = con.cursor()
+    
+    idnum = random.randint(0, 1000)
+
     cur.execute ("""
     INSERT INTO lost_items
     VALUES (?, ?, ?, ?, ?, ?)
-    """, (0, user_id, item_name, description, date_lost, location,))
+    """, (idnum, user_id, item_name, description, date_lost, location,))
     con.commit()
     con.close()
 
@@ -126,10 +133,13 @@ def found_item(user_id, item_name, description, date_found, location):
     con = sqlite3.connect("497_Lost_n_Found.db")
     # Creating a cursor makes a connection to connect the SQL server
     cur = con.cursor()
+
+    idnum = random.randint(0, 1000)
+
     cur.execute ("""
     INSERT INTO found_items
     VALUES (?, ?, ?, ?, ?, ?)
-    """, (0, user_id, item_name, description, date_found, location,))
+    """, (idnum, user_id, item_name, description, date_found, location,))
     con.commit()
     con.close()
 
