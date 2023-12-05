@@ -12,3 +12,5 @@ if ('speechSynthesis' in window) {
 } else {
     // Browser doesn't support speech synthesis
 }
+
+// 
