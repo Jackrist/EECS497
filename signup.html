@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/html5reset.css">
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
+    <title>Sign Up - Findzy</title>
+</head>
+
+<body>
+    <a class="skip" href="#skip">Skip to Main Content</a>
+    <div class="header">
+        <img src="images/logo.png" alt="lost and found logo" class="logo" />
+        <h1>Sign Up for Findzy</h1>
+    </div>
+    <main id="skip">
+        <nav>
+            <ul class="navLinks">
+                <li class="navItem"><a href="home.html">Home</a></li>
+                <li class="navItem"><a href="reminders.html">Reminders</a></li>
+                <li class="navItem"><a href="about.html">About</a></li>
+                <li class="navItem"><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+        <form action="{{url_for('signup')}}" method="post">
+            <label for="username">Username:</label>
+            <div class="input-container">
+
+                <input type="text" name="username" required>
+            </div>
+
+            <label for="password">Password:</label>
+            <div class="input-container">
+
+                <input type="password" name="password" required>
+            </div>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <div class="input-container">
+
+
+                <input type="password" name="confirm_password" required>
+            </div>
+
+            <label for="email">Email:</label>
+            <div class="input-container">
+
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="input-container">
+
+
+                <input type="submit" value="Sign Up">
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Lost and Found &copy; 2023</p>
+    </footer>
+</body>
+
+</html>

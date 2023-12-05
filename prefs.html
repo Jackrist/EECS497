@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Findzy - Edit Notification Preferences</title>
+    <!-- Include CSS and JavaScript libraries -->
+</head>
+<body>
+    <h1>Findzy</h1>
+    <h2 align="right">{{logname}} (UserID: {{userID}})</h2>
+
+    <div>
+        <h3>Edit notification preferences here!</h3>
+        <form action="{{url_for('edit_preferences')}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="user_id" value="{{userID}}"/>
+            <label for="item_pickup">Notify on Item Pickup? (TRUE/FALSE):</label>
+            <input type="text" name="item_pickup"/>
+            <label for="item_dropoff">Notify on Item Dropoff? (TRUE/FALSE):</label>
+            <input type="text" name="item_dropoff"/>
+            <label for="new_messages">Notify w/ New Messages? (TRUE/FALSE):</label>
+            <input type="text" name="new_messages"/>
+            <input type="submit" name="Submit!"/>
+        </form>
+    </div>
+</body>
+</html>

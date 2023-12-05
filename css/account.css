@@ -1,0 +1,159 @@
+/* Common Styles */
+.background {
+    width: 100%;
+}
+
+/* Logo Styles */
+.logo {
+    width: 10%;
+    margin: 5px;
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    background: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 1000; /* Set a high z-index value to keep the header on top */
+}
+
+/* Center the "Found" and "Lost" elements at the top of the header */
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+}
+
+/* Restyle h2 as needed */
+h2 {
+    font-size: 14px;
+    margin: 20px;
+    flex-grow: 1; /* Expand to fill available space */
+    text-align: right;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: white;
+    padding-top: 70px; /* Initial space below the header */
+    padding-bottom: 20px;
+    position: sticky;
+    top: 2%; /* Stick to the top of the viewport when scrolling */
+}
+
+.navLinks {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+}
+
+.navItem {
+    margin-right: 50px;
+}
+
+nav ul li a {
+    display: inline-block;
+    background-color: #fbfbfb;
+    text-decoration: none;
+    padding: 20px;
+    border: solid 2px #f8f5f5;
+    border-radius: 60px;
+    color: black;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+    background: #4aa3f7;
+    color: white;
+}
+
+/* Skip Link Styles */
+.skip {
+    position: absolute;
+    left: 0;
+    top: -40px;
+    z-index: 1;
+}
+
+.skip:focus {
+    left: 0;
+    top: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background: white;
+    color: black;
+    text-align: center;
+    padding: 1px;
+}
+/* Common Styles */
+/* ... (your existing styles) */
+
+/* Common Styles */
+/* ... (your existing styles) */
+
+/* Common Styles */
+/* ... (your existing styles) */
+
+/* Image Container Styles */
+/* Common Styles */
+/* ... (your existing styles) */
+
+/* Image Container Styles */
+.image-container {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.background {
+    width: 100%;
+    height: auto;
+}
+
+/* Button Styles */
+.button-container,
+.button-container2 {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button {
+    position: fixed;
+    background: #4aa3f7;
+    color: white;
+    padding: 20px 40px;
+    text-decoration: none;
+    border: solid 2px #f8f5f5;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 5px 10px;
+}
+.button-container {
+    top: auto; /* Reset the top value */
+    bottom: 700px; /* Adjust the bottom value to control the spacing */
+    width: 100%;
+}
+
+
+.button-container2 {
+    top: auto; /* Reset the top value */
+    bottom: 600px; /* Adjust the bottom value to control the spacing */
+    width: 100%;
+
+}
+
+.button:hover {
+    text-decoration: underline;
+}
