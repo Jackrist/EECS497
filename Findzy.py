@@ -59,7 +59,7 @@ def submit_lost():
         location = request.form.get('location')
 
         db.lost_item(userID, item_name, description, date_lost, location)
-        return redirect(url_for('show_homepage'))
+        return redirect(url_for('show_account'))
     else: # GET
         logname, user_id = db.get_logged_in_user()
         context = {"logname": logname, "userID": user_id}
@@ -78,7 +78,7 @@ def submit_found():
         location = request.form.get('location')
 
         db.found_item(userID, item_name, description, date_found, location)
-        return redirect(url_for('show_homepage'))
+        return redirect(url_for('show_account'))
     else: # GET
         logname, user_id = db.get_logged_in_user()
         context = {"logname": logname, "userID": user_id}
@@ -92,9 +92,8 @@ def show_homepage():
     
     # Context-gathering & combination
     logname, user_id = db.get_logged_in_user()
-    losts = db.get_losts(user_id)
-    founds = db.get_founds(user_id)
-    context = {"logname": logname, "userID": user_id, "losts": losts, "founds": founds}
+    context = {"logname": logname, "userID": user_id}
+    
 
     return render_template('home.html', **context)
 
@@ -118,9 +117,37 @@ def show_login():
     else: # 'GET'
         return render_template('login.html')
 
+
+@app.route('/reminders/', methods=['GET'])
+def show_reminders():
+    logname, user_id = db.get_logged_in_user()
+    context = {"logname": logname, "userID": user_id}
+
+    return render_template('reminders.html', **context)
+
+
+@app.route('/account/', methods=['GET'])
+def show_account():
+    logname, user_id = db.get_logged_in_user()
+    losts = db.get_losts(user_id)
+    founds = db.get_founds(user_id)
+    context = {"logname": logname, "userID": user_id, "losts": losts, "founds": founds}
+
+    return render_template('account.html', **context)
+
+
+@app.route('/about/', methods=['GET'])
+def show_about():
+    logname, user_id = db.get_logged_in_user()
+    context = {"logname": logname, "userID": user_id}
+
+    return render_template('about.html', **context)
+
+
 @app.route('/loginerr/')
 def login_error():
     return render_template('logerr.html')
+
 
 if __name__ == '__main__':
     app.run()

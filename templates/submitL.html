@@ -6,26 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/html5reset.css">
-    <link rel="stylesheet" type="text/css" href="css/submitl.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='submitl.css')}}">
     <!-- <script src="js/home.js"></script> -->
     <title>Findzy - Submit Lost Item</title>
     <!-- Include CSS and JavaScript libraries -->
 </head>
 
 <body>
-    <a class="skip" href="#skip">Skip to Main Content</a>
     <div class="header">
-        <img src="images/logo.png" alt="lost and found logo" class="logo" />
+        <img src="{{url_for('static', filename='images/logo.png')}}" alt="lost and found logo" class="logo" />
         <h1>Findzy</h1>
         <h2>{{logname}} (UserID: {{userID}})</h2>
     </div>
     <main id="skip">
         <nav>
             <ul class="navLinks">
-                <li class="navItem"><a href="home.html">Home</a></li>
-                <li class="navItem"><a href="reminders.html">Reminders</a></li>
-                <li class="navItem"><a href="about.html">About</a></li>
-                <li class="navItem"><a href="profile.html">Profile</a></li>
+                <li class="navItem"><a href="{{url_for('show_homepage')}}">Home</a></li>
+                <li class="navItem"><a href="{{url_for('show_reminders')}}">Reminders</a></li>
+                <li class="navItem"><a href="{{url_for('show_about')}}">About</a></li>
+                <li class="navItem"><a href="{{url_for('show_account')}}">Account</a></li>
             </ul>
         </nav>
         <div>
@@ -33,29 +32,22 @@
                 <h3>Submit a lost item here!</h3>
                 <!-- Rest of your form content -->
             </div>
-            <form action="{{url_for('submit_lost_item')}}" method="post" enctype="multipart/form-data">
+            <form action="{{url_for('submit_lost')}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{userID}}"/>
                 <label for="item_name">Item Name:</label>
-                <div class="input-container">
-                    <input type="text" name="item_name" />
-                </div>
-
+                <input type="text" name="item_name"/>
                 <label for="description">Item Description:</label>
-                <div class="input-container">
-                    <input type="text" name="description" />
-                </div>
-
+                <input type="text" name="description"/>
                 <label for="date_lost">Date Lost (YYYY-MM-DD):</label>
-                <div class="input-container">
-                    <input type="text" name="date_lost" />
-                </div>
-
+                <input type="text" name="date_lost"/>
                 <label for="location">Location:</label>
-                <div class="input-container">
-                    <input type="text" name="location" />
-                </div>
-                <div class="input-container">
-                    <input type="submit" name="Submit!" />
-                </div>
+                <input type="text" name="location"/>
+                <input type="submit" name="Submit!" onclick="myalert()"/>
+                <script>
+                    function myalert() {
+                        alert("Item Submitted Successfully!!");
+                    }
+                </script>
             </form>
         </div>
     </main>

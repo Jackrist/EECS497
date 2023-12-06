@@ -1,31 +1,26 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/html5reset.css">
-    <link rel="stylesheet" type="text/css" href="css/signup.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='signup.css')}}">
     <title>Sign Up - Findzy</title>
 </head>
 
 <body>
-    <a class="skip" href="#skip">Skip to Main Content</a>
     <div class="header">
-        <img src="images/logo.png" alt="lost and found logo" class="logo" />
+        <img src="{{url_for('static', filename='images/logo.png')}}" alt="lost and found logo" class="logo" />
         <h1>Sign Up for Findzy</h1>
     </div>
     <main id="skip">
         <nav>
             <ul class="navLinks">
-                <li class="navItem"><a href="home.html">Home</a></li>
-                <li class="navItem"><a href="reminders.html">Reminders</a></li>
-                <li class="navItem"><a href="about.html">About</a></li>
-                <li class="navItem"><a href="account.html">Account</a></li>
+               
             </ul>
         </nav>
-        <form action="{{url_for('signup')}}" method="post">
+        <form action="{{url_for('register_user')}}" method="post">
             <label for="username">Username:</label>
             <div class="input-container">
 

@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/html5reset.css">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='about.css')}}">
     <!-- <script src="js/home.js"></script> -->
    
     <title>Findzy</title>
-
+    
 </head>
 <body>
-    <a class = "skip" href="#skip">Skip to Main Content</a> 
     <div class="header">
         <img src="{{url_for('static', filename='images/logo.png')}}" alt="lost and found logo">
         <h1>Findzy</h1>
@@ -22,10 +22,10 @@
         
         <nav>
             <ul class="navLinks">
-                <li class="navItem"><a href="home.html">Home</a></li>
-                <li class="navItem"><a href="reminders.html">Reminders</a></li>
-                <li class="navItem"><a href="about.html">About</a></li>
-                <li class="navItem"><a href="account.html">Account</a></li>
+                <li class="navItem"><a href="{{url_for('show_homepage')}}">Home</a></li>
+                <li class="navItem"><a href="{{url_for('show_reminders')}}">Reminders</a></li>
+                <li class="navItem"><a href="{{url_for('show_about')}}">About</a></li>
+                <li class="navItem"><a href="{{url_for('show_account')}}">Account</a></li>
             </ul>
         </nav>
         <div class="image-container">
