@@ -1,19 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='login.css')}}">
+    <!-- <script src="js/home.js"></script> -->
         <title>Findzy</title>
         <!-- Include CSS and JavaScript libraries -->
     </head>
     <body>
-        <h1>Findzy</h1>
-        <form action="{{url_for('show_login')}}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" name="username" required/>
-            <label for="password">Password:</label>
-            <input type="text" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-        <p>Don't have an account? <a href="{{url_for('register_user')}}"> Sign up</a></p>
+        <a class="skip" href="#skip">Skip to Main Content</a>
+        <div class="header">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="lost and found logo" class="logo" />
+            <h1>Findzy</h1>
+        </div>
+        <main id="skip">
+            <nav>
+                <ul class="navLinks">
+                    
+                </ul>
+            </nav>
+            <form action="{{url_for('show_login')}}" method="post">
+                <label for="username">Username:</label>
+                <div class="input-container">
+                    
+                    <input type="text" name="username" required/>
+                </div>
+                <label for="password">Password:</label>
+                <div class="input-container">
+                    
+                    <input type="text" name="password" required>
+                </div>
+                <div class="input-container">
+                   
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+            <p>Don't have an account? <a href="{{url_for('register_user')}}"> Sign up</a></p>
+        </main>
+        <footer>
+            <p>Lost and Found &copy; 2023</p>
+        </footer>
     </body>
 </html>
+
+<!--  -->
