@@ -30,31 +30,33 @@
         </nav>
         <div class="image-container">
             <img src="{{url_for('static', filename='images/whiteback.png')}}" alt="background of homepage" class="background"/>
+            <div class="chart-container">
+             <div class="lost-items">
+                 <h3>My Lost Items</h3>
+                 {% for lost in losts %}
+                 <div>
+                     <h4>{{lost[1]}}</h4>
+                     ID: {{lost[0]}}, Description: {{lost[2]}}, Date Lost: {{lost[3]}}, Location: {{lost[4]}}
+                 </div>
+                 {% endfor %}
+             </div>
+     
+             <div class="found-items">
+                 <h3>Items I've Found</h3>
+                 {% for found in founds %}
+                 <div>
+                     <h4>{{found[1]}}</h4>
+                     ID: {{found[0]}}, Description: {{found[2]}}, Date Found: {{found[3]}}, Location: {{found[4]}}
+                 </div>
+                 {% endfor %}
+             </div>
+         </div>
         </div>
        </main>
 
-       <div>
-            <h3>My Lost Items</h3>
-            {% for lost in losts %}
-            <div>
-                <h4>{{lost[1]}}</h4>
-                ID: {{lost[0]}}, Description: {{lost[2]}}, Date Lost: {{lost[3]}}, Location: {{lost[4]}}
-            </div>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h3>Items I've Found</h3>
-            {% for found in founds %}
-            <div>
-                <h4>{{found[1]}}</h4>
-                ID: {{found[0]}}, Description: {{found[2]}}, Date Found: {{found[3]}}, Location: {{found[4]}}
-            </div>
-            {% endfor %}
-        </div>
 
     <footer>
-        <p>Lost and Found &copy; 2023</p>
+        <p>Findzy &copy; 2023</p>
     </footer>
 </body>
 </html>

@@ -89,7 +89,7 @@ footer {
     text-align: center;
     padding: 1px;
 }
-.centered-text {
+.centered-text h3 {
     text-align: center; /* Center the text horizontally */
     font-size: 150%;
     color: #4aa3f7;
@@ -103,7 +103,15 @@ label {
 }
 
 /* Input Container Styles */
-.input-container {
+/* .input-container {
     text-align: center; /* Center the input element horizontally */
-    margin-bottom: 20px; /* Add spacing between the label and input */
-}
+    /* margin-bottom: 20px; Add spacing between the label and input */
+
+    .input-container {
+        text-align: center; /* Center the input element horizontally */
+        margin-bottom: 20px; /* Add spacing between the label and input */
+    }
+    input[type="submit"] {
+        display: block; /* Make the submit button a block-level element */
+        margin: 0 auto; /* Center the submit button horizontally */
+    }

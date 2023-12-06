@@ -106,11 +106,11 @@ footer {
 /* ... (your existing styles) */
 
 /* Image Container Styles */
-.image-container {
+/* .image-container {
     position: relative;
     text-align: center;
     z-index: 1;
-}
+} */
 
 .background {
     width: 100%;
@@ -157,3 +157,59 @@ footer {
 .button:hover {
     text-decoration: underline;
 }
+
+/* Add or modify styles as needed */
+.image-container {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+/* ... (your existing styles) */
+
+.chart-container {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 80%; /* Adjust the width as needed */
+}
+
+.lost-items,
+.found-items {
+    flex: 1;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border: 1px solid #ccc;
+    margin: 20px;
+    overflow-y: auto; /* Add vertical scroll if needed */
+    border-radius: 15px; 
+
+}
+
+.lost-items {
+    order: 1; /* Set the order to 1 for left side */
+}
+
+.found-items {
+    order: 2; /* Set the order to 2 for right side */
+}
+
+.lost-items h3,
+.found-items h3 {
+    text-align: center;
+    color: black;
+    margin-top: 10; /* Remove default margin for h3 */
+    color: #4aa3f7;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.lost-items div,
+.found-items div {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+/* ... (your existing styles) */
